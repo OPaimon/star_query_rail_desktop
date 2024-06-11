@@ -4,7 +4,8 @@ from PyQt5.QtCore import Qt, QTranslator, QLocale
 from PyQt5.QtWidgets import QApplication
 from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, SplitTitleBar, isDarkTheme
 
-from star_query_rail_client.view.login_window import LoginWindow
+
+from star_query_rail_desktop.view.login_window import LoginWindow
 
 if __name__ == '__main__':
     # enable dpi scale

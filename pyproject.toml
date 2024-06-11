@@ -1,5 +1,5 @@
 [project]
-name = "star-query-rail-client"
+name = "star-query-rail-desktop"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
@@ -8,6 +8,9 @@ authors = [
 dependencies = [
     "pyqt5>=5.15.10",
     "pyqt-fluent-widgets>=1.5.7",
+    "httpx>=0.25.0",
+    "requests>=2.32.3",
+    "simnet @ git+https://github.com/PaiGramTeam/SIMNet"
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
@@ -36,7 +39,7 @@ dev-dependencies = [
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["star_query_rail_client"]
+packages = ["star_query_rail_desktop"]
 
 
 [tool.ruff]

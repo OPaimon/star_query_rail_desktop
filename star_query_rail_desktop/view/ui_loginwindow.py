@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from qfluentwidgets import BodyLabel, CheckBox, HyperlinkButton, LineEdit, PrimaryPushButton
-import star_query_rail_client.resorce_rc
+import star_query_rail_desktop.resorce_rc
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -117,14 +117,14 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.lineEdit.setPlaceholderText(_translate("Form", "ftp.example.com"))
+        self.lineEdit.setPlaceholderText(_translate("Form", ""))
         self.label_3.setText(_translate("Form", "主机"))
-        self.lineEdit_2.setText(_translate("Form", "21"))
+        self.lineEdit_2.setText(_translate("Form", ""))
         self.label_4.setText(_translate("Form", "端口"))
         self.label_5.setText(_translate("Form", "用户名"))
-        self.lineEdit_3.setPlaceholderText(_translate("Form", "example@example.com"))
+        self.lineEdit_3.setPlaceholderText(_translate("Form", ""))
         self.label_6.setText(_translate("Form", "密码"))
-        self.lineEdit_4.setPlaceholderText(_translate("Form", "••••••••••••"))
+        self.lineEdit_4.setPlaceholderText(_translate("Form", ""))
         self.checkBox.setText(_translate("Form", "记住密码"))
         self.pushButton.setText(_translate("Form", "登录"))
         self.pushButton_2.setText(_translate("Form", "找回密码"))

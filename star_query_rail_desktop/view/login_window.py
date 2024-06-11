@@ -1,11 +1,11 @@
 import sys
 
+from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QTranslator, QLocale
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 from PyQt5.QtWidgets import QApplication
 from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, SplitTitleBar, isDarkTheme
 from .ui_loginwindow import Ui_Form
-
 
 def isWin11():
     return sys.platform == 'win32' and sys.getwindowsversion().build >= 22000
@@ -29,7 +29,7 @@ class LoginWindow(Window, Ui_Form):
         self.titleBar.raise_()
 
         self.label.setScaledContents(False)
-        self.setWindowTitle('PyQt-Fluent-Widget')
+        self.setWindowTitle('STAR_QUERY_RAIL')
         self.setWindowIcon(QIcon(":/resource/login_picture.jpeg"))
         self.resize(1000, 650)
 
@@ -51,9 +51,33 @@ class LoginWindow(Window, Ui_Form):
         w, h = desktop.width(), desktop.height()
         self.move(w//2 - self.width()//2, h//2 - self.height()//2)
 
+        #connect to slot
+        self.pushButton.clicked.connect(self.jmp_mainwindow)
+        self.pushButton_3.clicked.connect(self.jmp_register)
+
     def resizeEvent(self, e):
         super().resizeEvent(e)
         pixmap = QPixmap(":/resource/login_picture.jpeg").scaled(
             self.label.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
         self.label.setPixmap(pixmap)
+
+    @QtCore.pyqtSlot()
+    def jmp_register(self):
+        from .register_window import register_window
+        self.close()
+        w = register_window()
+        w.show()
+
+
+    @QtCore.pyqtSlot()
+    def jmp_mainwindow(self):
+        from .mainwindow import Window
+        self.close()
+        w = Window()
+        w.show()
+
+
+
+
+
 
