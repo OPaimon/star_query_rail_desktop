@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QApplication, QFrame, QHBoxLayout, QLineEdit, QPushB
 from qfluentwidgets import (NavigationItemPosition, MessageBox, setTheme, Theme, FluentWindow,
                             NavigationAvatarWidget, qrouter, SubtitleLabel, setFont, InfoBadge,
                             InfoBadgePosition, FluentBackgroundTheme, FlyoutView, PushButton, Flyout, setThemeColor,
-                            SplitTitleBar)
+                            SplitTitleBar, LineEdit, MessageBoxBase)
 from qfluentwidgets import FluentIcon as FIF
 from star_query_rail_client import AuthenticatedClient as Client
 from star_query_rail_client.api.user import get_characters_detail_user_get_post
@@ -285,10 +285,10 @@ class HomeInterface(Widget):
             # 中间的名字和信息
             middle_layout = QVBoxLayout()
 
-            name_label = QLabel('Your Name', scroll_content)
+            name_label = QLabel(item.name, scroll_content)
             middle_layout.addWidget(name_label)
 
-            info_label = QLabel('Additional info here', scroll_content)
+            info_label = QLabel(str(item.level), scroll_content)
             middle_layout.addWidget(info_label)
 
             layout.addLayout(middle_layout)
@@ -364,15 +364,65 @@ class HomeInterface(Widget):
 
 
 
-class NoteInterface(Widget):
+class AdministratorInterface(Widget):
     def __init__(self,text: str, parent=None):
         super().__init__('Note', parent)
+
+       # users = get()
+        users = [1,2,3,4]
+        for user in users:
+            #if user is not super_user:
+                User_Layout = QHBoxLayout()
+                User_Layout.addWidget(QLabel(str('a')))
+                delete_button = QPushButton("删除")
+               # delete_button.clicked.connect(self.delete())
+                User_Layout.addWidget(delete_button)
+                self.vBoxLayout.addLayout(User_Layout)
+
+
+
+    # def get(self):
+    # @QtCore.pyqtSlot()
+    # def delete(self):
+
+
 
 
 
 class SettingInterface(Widget):
     def __init__(self, text: str, parent=None):
         super().__init__('Note',parent)
+
+
+class CustomMessageBox(MessageBoxBase):
+    """ Custom message box """
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.titleLabel = SubtitleLabel('INPUT', self)
+        self.urlLineEdit = LineEdit(self)
+
+        self.urlLineEdit.setPlaceholderText('输入COOKIE')
+        self.urlLineEdit.setClearButtonEnabled(True)
+
+        # add widget to view layout
+        self.viewLayout.addWidget(self.titleLabel)
+        self.viewLayout.addWidget(self.urlLineEdit)
+
+        # change the text of button
+        self.yesButton.setText('打开')
+        self.cancelButton.setText('取消')
+
+        self.widget.setMinimumWidth(350)
+        self.yesButton.setDisabled(True)
+        self.urlLineEdit.textChanged.connect(self._validateUrl)
+
+        # self.hideYesButton()
+
+    def _validateUrl(self, text):
+        self.yesButton.setEnabled(QUrl(text).isValid())
+
+
 
 
 
@@ -383,26 +433,25 @@ class Window(FluentWindow):
 
         # create sub interface
         self.homeInterface = HomeInterface('Home', self)
-        self.searchInterface = Widget('Search Interface', self)
-        self.administratorInterface = Widget('Administrator Interface', self)
-        self.noteInterface = NoteInterface('note',self);
+        self.administratorInterface = AdministratorInterface('Administrator Interface', self)
         self.settingInterface = SettingInterface('', self)
         self.initNavigation()
         self.initWindow()
 
     def initNavigation(self):
         self.addSubInterface(self.homeInterface, FIF.HOME, 'Home')
-        self.addSubInterface(self.searchInterface, FIF.SEARCH, 'Search')
         self.addSubInterface(self.administratorInterface, FIF.CLOUD, 'Administrator')
-        self.addSubInterface(self.noteInterface,FIF.ACCEPT,'NOTE')
         self.addSubInterface(self.settingInterface, FIF.SETTING,'')
         self.navigationInterface.addSeparator()
         self.navigationInterface.addWidget(
             routeKey='avatar',
-            widget=NavigationAvatarWidget('about us', ':/resource/login_picture.jpeg'),
-            onClick=self.showInputBox,
+            widget=NavigationAvatarWidget('input cookie', './resource/login_picture.jpeg'),
+            onClick=self.showDialog,
             position=NavigationItemPosition.BOTTOM,
         )
+        admin_item = self.navigationInterface.widget(self.administratorInterface.objectName())
+        admin_item.clicked.disconnect()
+        admin_item.clicked.connect(self.onAdminInterfaceClick)
         item = self.navigationInterface.widget(self.administratorInterface.objectName())
         InfoBadge.attension(
             text=1,
@@ -431,14 +480,16 @@ class Window(FluentWindow):
         status = r.status_code
         return status
 
-    def showInputBox(self):
-        text, ok = QInputDialog.getText(self, 'Cookie', 'Enter your cookie:')
-        if ok:
-            status = self.bind_cookie(text)
-            if status == 200:
-                QMessageBox.information(self, 'Success', 'Cookie bound successfully!')
-            elif status == 401:
-                QMessageBox.warning(self, 'Error', 'authorization error!')
+    def onAdminInterfaceClick(self):
+        if 1==2:
+            self.navigationInterface.navigateTo(self.administratorInterface.objectName())
+        else:
+            QMessageBox.warning(self, 'Access Denied', 'You do not have administrator privileges.')
+
+    def showDialog(self):
+        w = CustomMessageBox(self)
+        if w.exec():
+            print(w.urlLineEdit.text())
 
 
 
