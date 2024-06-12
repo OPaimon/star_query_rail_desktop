@@ -12,6 +12,8 @@ dependencies = [
     "requests>=2.32.3",
     "simnet @ git+https://github.com/PaiGramTeam/SIMNet",
     "star-query-rail-client @ git+https://github.com/OPaimon/star_query_rail_client.git",
+    "pydantic<2.0.0",
+    "pytest-asyncio>=0.23.7",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
