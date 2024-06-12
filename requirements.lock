@@ -11,6 +11,8 @@
 -e file:.
 anyio==4.4.0
     # via httpx
+attrs==23.2.0
+    # via star-query-rail-client
 certifi==2024.6.2
     # via httpcore
     # via httpx
@@ -27,6 +29,7 @@ httpcore==1.0.5
     # via httpx
 httpx==0.25.2
     # via simnet
+    # via star-query-rail-client
     # via star-query-rail-desktop
 idna==3.7
     # via anyio
@@ -47,13 +50,19 @@ pyqt5-qt5==5.15.2
     # via pyqt5
 pyqt5-sip==12.13.0
     # via pyqt5
+python-dateutil==2.9.0.post0
+    # via star-query-rail-client
 requests==2.32.3
     # via star-query-rail-desktop
 simnet @ git+https://github.com/PaiGramTeam/SIMNet@a3eb0bcfa5dca0a930ff61e5c66082c3cfc58953
     # via star-query-rail-desktop
+six==1.16.0
+    # via python-dateutil
 sniffio==1.3.1
     # via anyio
     # via httpx
+star-query-rail-client @ git+https://github.com/OPaimon/star_query_rail_client.git@eeda79bae6c4f83830e40b33da976c7e7f6a4835
+    # via star-query-rail-desktop
 typing-extensions==4.12.2
     # via pydantic
 urllib3==2.2.1

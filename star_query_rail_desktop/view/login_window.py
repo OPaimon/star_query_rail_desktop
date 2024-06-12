@@ -1,11 +1,18 @@
 import sys
 
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QTranslator, QLocale
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 from PyQt5.QtWidgets import QApplication
-from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, SplitTitleBar, isDarkTheme
+from qfluentwidgets import setThemeColor, SplitTitleBar, isDarkTheme
+from star_query_rail_client import Client
+from star_query_rail_client.models import BodyLoginAccessTokenLoginAccessTokenPost, Token
+from star_query_rail_client.types import Response
+from star_query_rail_client.api.login import login_access_token_login_access_token_post
+
 from .ui_loginwindow import Ui_Form
+from ..config import url
+
 
 def isWin11():
     return sys.platform == 'win32' and sys.getwindowsversion().build >= 22000
@@ -72,9 +79,21 @@ class LoginWindow(Window, Ui_Form):
     @QtCore.pyqtSlot()
     def jmp_mainwindow(self):
         from .mainwindow import Window
-        self.close()
-        w = Window()
-        w.show()
+        from ..config import token_dict
+        client = Client(base_url=url)
+        body = BodyLoginAccessTokenLoginAccessTokenPost(username="1@qq.com",password="1")
+        with client as client:
+            response: Response[Token] = login_access_token_login_access_token_post.sync(client=client,body=body)
+
+        response: Token = response
+        token_dict = response.to_dict()
+
+        if response:
+            self.close()
+            w = Window()
+            w.show()
+        else:
+            print("error")
 
 
 

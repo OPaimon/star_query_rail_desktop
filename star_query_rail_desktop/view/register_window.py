@@ -6,6 +6,10 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QTranslator, QLocale
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 from PyQt5.QtWidgets import QApplication
+from star_query_rail_client import Client
+from star_query_rail_client.models import EmailRegister,Email
+from star_query_rail_client.api.account import register_account_account_signup_post
+from star_query_rail_client.types import Response
 from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, SplitTitleBar, isDarkTheme
 
 from .ui_registerwindow import Ui_register
@@ -44,18 +48,9 @@ class register_window(Window, Ui_register):
 
     @QtCore.pyqtSlot()
     def register_account(self):
-        email = self.emailLineEdit.text()
-        psw = self.passwordLineEdit.text()
-        headers = {
-            "Content-Type": "application/json"
-        }
-        data = {
-         'email': email,
-         'psw': psw
-        }
-        print(email)
-        print(psw)
-        if self.is_valid_email(email) and self.is_valid_psw(psw):
-            r = httpx.post(url+'/account/signup', headers=headers, data=data)
-            print(r.status_code)
-
+        email_register = EmailRegister(email=self.emailLineEdit.text(),psw=self.passwordLineEdit.text())
+        client = Client(base_url=url)
+        with client as client:
+            response: Response[Email] = register_account_account_signup_post.sync(client=client,body=email_register)
+            response: Email = response
+            print(response.to_dict())

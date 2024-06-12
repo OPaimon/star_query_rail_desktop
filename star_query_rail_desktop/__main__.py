@@ -8,7 +8,6 @@ from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, Spl
 from star_query_rail_desktop.view.login_window import LoginWindow
 
 if __name__ == '__main__':
-    # enable dpi scale
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)

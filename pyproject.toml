@@ -10,7 +10,8 @@ dependencies = [
     "pyqt-fluent-widgets>=1.5.7",
     "httpx>=0.25.0",
     "requests>=2.32.3",
-    "simnet @ git+https://github.com/PaiGramTeam/SIMNet"
+    "simnet @ git+https://github.com/PaiGramTeam/SIMNet",
+    "star-query-rail-client @ git+https://github.com/OPaimon/star_query_rail_client.git",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
