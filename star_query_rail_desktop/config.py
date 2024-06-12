@@ -1,5 +1,5 @@
-url = "http://hk.opaimon.info:8000"
-token ='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjA2NzMyMjIsInN1YiI6InBhaW1vZUBidXB0LmVkdS5jbiJ9.kUxkdRA3oC-oUv3JbRYr0urwVwfGJj-DPMbfuE0uEx8'
+url = "http://hk.opaimon.info:5001"
+token : str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjA3ODIyNTQsInN1YiI6InBhaW1vZUBidXB0LmVkdS5jbiJ9.-6eOg5MT0MZXFGS3-dm9LWYVX_yDhk-EzsIipOdPhnA"
 userid = 284738632
 character = [100678548]
 token_dict : dict = dict()

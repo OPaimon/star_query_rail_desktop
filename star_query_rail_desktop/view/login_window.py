@@ -4,7 +4,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QPixmap, QColor
 from PyQt5.QtWidgets import QApplication
-from qfluentwidgets import setThemeColor, SplitTitleBar, isDarkTheme
+from qfluentwidgets import setThemeColor, SplitTitleBar, isDarkTheme, TeachingTipTailPosition, InfoBarIcon, TeachingTip
 from star_query_rail_client import Client
 from star_query_rail_client.models import BodyLoginAccessTokenLoginAccessTokenPost, Token
 from star_query_rail_client.types import Response
@@ -79,21 +79,49 @@ class LoginWindow(Window, Ui_Form):
     @QtCore.pyqtSlot()
     def jmp_mainwindow(self):
         from .mainwindow import Window
-        from ..config import token_dict
+        from ..config import token
+
+        url = "http://" + self.lineEdit.text() + self.lineEdit_2.text()
         client = Client(base_url=url)
-        body = BodyLoginAccessTokenLoginAccessTokenPost(username="1@qq.com",password="1")
-        with client as client:
-            response: Response[Token] = login_access_token_login_access_token_post.sync(client=client,body=body)
+        username = self.lineEdit_3
+        password=self.lineEdit_4
+        username = "paimoe@bupt.edu.cn"
+        password = "testpw"
+        body = BodyLoginAccessTokenLoginAccessTokenPost(username=username,password=password)
+        url = "http://" + self.lineEdit.text() + self.lineEdit_2.text()
+        client = Client(base_url=url)
+        username = self.lineEdit_3
+        password = self.lineEdit_4
+        username = "paimoe@bupt.edu.cn"
+        password = "testpw"
+        body = BodyLoginAccessTokenLoginAccessTokenPost(username=username, password=password)
 
-        response: Token = response
-        token_dict = response.to_dict()
+        try:
+            with client as client:
+                response: Token = login_access_token_login_access_token_post.sync(client=client, body=body)
 
-        if response:
-            self.close()
-            w = Window()
-            w.show()
-        else:
-            print("error")
+            if response:
+                self.close()
+                w = Window()
+                w.show()
+            else:
+                self.showBottomTip()
+
+        except Exception as e:
+            print("连接错误:", e)
+            self.showBottomTip()
+
+    def showBottomTip(self):
+        TeachingTip.create(
+            target=self.pushButton_2,
+            icon=InfoBarIcon.SUCCESS,
+            title='error',
+            content="账号或密码有误 请重新登录",
+            isClosable=True,
+            tailPosition=TeachingTipTailPosition.TOP,
+            duration=2000,
+            parent=self
+        )
 
 
 

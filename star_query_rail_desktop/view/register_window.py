@@ -10,7 +10,7 @@ from star_query_rail_client import Client
 from star_query_rail_client.models import EmailRegister,Email
 from star_query_rail_client.api.account import register_account_account_signup_post
 from star_query_rail_client.types import Response
-from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, SplitTitleBar, isDarkTheme
+from qfluentwidgets import setThemeColor, FluentTranslator, setTheme, Theme, SplitTitleBar, isDarkTheme, MessageBox
 
 from .ui_registerwindow import Ui_register
 from star_query_rail_desktop.config import url
@@ -53,4 +53,17 @@ class register_window(Window, Ui_register):
         with client as client:
             response: Response[Email] = register_account_account_signup_post.sync(client=client,body=email_register)
             response: Email = response
-            print(response.to_dict())
+        print(type(response))
+        if type(response) is Email:
+            self.showDialog(t="恭喜", s="成功注册!!")
+        else :
+            self.showDialog(t="抱歉", s="邮箱账号错误 或网络状况不佳 请重新注册")
+    def showDialog(self,t:str, s:str):
+        title = t
+        content = s
+        # w = MessageDialog(title, content, self)   # Win10 style message box
+        w = MessageBox(title, content, self)
+        if w.exec():
+            print('Yes button is pressed')
+        else:
+            print('Cancel button is pressed')
