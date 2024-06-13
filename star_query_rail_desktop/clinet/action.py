@@ -105,8 +105,8 @@ def unbind_user() -> Message:
         return response
 
 
-def get_characters_detail(index: int == 0) -> StarRailDetailCharacters:
-    if status.token:
+def get_characters_detail(index: int == 0) -> StarRailDetailCharacters | None:
+    if status.token and status.character:
         body = ConnectUCRegister(cid=status.character[index].cid, userid=status.userid)
         with AuthenticatedClient(
             base_url=settings.API_url, token=status.token
@@ -115,3 +115,4 @@ def get_characters_detail(index: int == 0) -> StarRailDetailCharacters:
                 client=client, body=body
             )
         return response
+    return None

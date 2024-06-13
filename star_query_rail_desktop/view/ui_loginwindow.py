@@ -1,6 +1,14 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from qfluentwidgets import BodyLabel, CheckBox, HyperlinkButton, LineEdit, PrimaryPushButton
 import star_query_rail_desktop.resorce_rc
+from PyQt5 import QtCore, QtGui, QtWidgets
+from qfluentwidgets import (
+    BodyLabel,
+    CheckBox,
+    HyperlinkButton,
+    LineEdit,
+    PrimaryPushButton,
+)
+from star_query_rail_desktop.clinet.config import settings
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -18,26 +26,30 @@ class Ui_Form(object):
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.widget = QtWidgets.QWidget(Form)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
         self.widget.setSizePolicy(sizePolicy)
         self.widget.setMinimumSize(QtCore.QSize(360, 0))
         self.widget.setMaximumSize(QtCore.QSize(360, 16777215))
-        self.widget.setStyleSheet("QLabel{\n"
-"    font: 13px \'Microsoft YaHei\'\n"
-"}")
+        self.widget.setStyleSheet("QLabel{\n" "    font: 13px 'Microsoft YaHei'\n" "}")
         self.widget.setObjectName("widget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout_2.setContentsMargins(20, 20, 20, 20)
         self.verticalLayout_2.setSpacing(9)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout_2.addItem(spacerItem)
         self.label_2 = QtWidgets.QLabel(self.widget)
         self.label_2.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
@@ -49,7 +61,9 @@ class Ui_Form(object):
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_2.addWidget(self.label_2, 0, QtCore.Qt.AlignHCenter)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+        )
         self.verticalLayout_2.addItem(spacerItem1)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setHorizontalSpacing(4)
@@ -66,6 +80,8 @@ class Ui_Form(object):
         self.lineEdit_2.setPlaceholderText("")
         self.lineEdit_2.setClearButtonEnabled(True)
         self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit.setText(settings.API_url.split(":")[1].replace("//", ""))
+        self.lineEdit_2.setText("8000")
         self.gridLayout.addWidget(self.lineEdit_2, 1, 1, 1, 1)
         self.label_4 = BodyLabel(self.widget)
         self.label_4.setObjectName("label_4")
@@ -88,18 +104,24 @@ class Ui_Form(object):
         self.lineEdit_4.setClearButtonEnabled(True)
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.verticalLayout_2.addWidget(self.lineEdit_4)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+        )
         self.verticalLayout_2.addItem(spacerItem2)
         self.checkBox = CheckBox(self.widget)
         self.checkBox.setChecked(True)
         self.checkBox.setObjectName("checkBox")
         self.verticalLayout_2.addWidget(self.checkBox)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+        )
         self.verticalLayout_2.addItem(spacerItem3)
         self.pushButton = PrimaryPushButton(self.widget)
         self.pushButton.setObjectName("pushButton")
         self.verticalLayout_2.addWidget(self.pushButton)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 6, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            20, 6, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+        )
         self.verticalLayout_2.addItem(spacerItem4)
         self.pushButton_2 = HyperlinkButton(self.widget)
         self.pushButton_2.setObjectName("pushButton_2")
@@ -107,7 +129,9 @@ class Ui_Form(object):
         self.pushButton_3 = HyperlinkButton(self.widget)
         self.pushButton_3.setObjectName("pushButton_3")
         self.verticalLayout_2.addWidget(self.pushButton_3)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+        )
         self.verticalLayout_2.addItem(spacerItem5)
         self.horizontalLayout.addWidget(self.widget)
 
@@ -119,7 +143,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.lineEdit.setPlaceholderText(_translate("Form", ""))
         self.label_3.setText(_translate("Form", "主机"))
-        self.lineEdit_2.setText(_translate("Form", ""))
+        self.lineEdit_2.setText(_translate("Form", settings.API_url.split(":")[2]))
         self.label_4.setText(_translate("Form", "端口"))
         self.label_5.setText(_translate("Form", "用户名"))
         self.lineEdit_3.setPlaceholderText(_translate("Form", ""))

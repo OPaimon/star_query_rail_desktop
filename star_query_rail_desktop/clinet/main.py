@@ -44,18 +44,18 @@ def test_get_characters_detail():
     return "done"
 
 
-def test_unbind_user():
-    login("abb", "testpw")
-    response = get_info()
-    print(response)
-    print("\n")
-    response = unbind_user()
-    print(response)
-    print("\n")
-    response = get_info()
-    print(response)
-    print("\n")
-    return "done"
+# def test_unbind_user():
+#     login("abb", "testpw")
+#     response = get_info()
+#     print(response)
+#     print("\n")
+#     response = unbind_user()
+#     print(response)
+#     print("\n")
+#     response = get_info()
+#     print(response)
+#     print("\n")
+#     return "done"
 
 
 def test_update_password():

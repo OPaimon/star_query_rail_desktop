@@ -12,6 +12,7 @@ class Status(BaseSettings):
     userid: int | None = None
     character: list[int] | None = None
     token: str | None = None
+    API_url: str = "http://localhost:8000"
 
 
 settings = Settings()
